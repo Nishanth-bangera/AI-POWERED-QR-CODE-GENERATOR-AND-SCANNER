@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>QRNISH - Login</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="5decor.css">
+</head>
+<body>
+
+    <!-- Ambient Background Orbs -->
+    <div class="bg-orb orb-blue"></div>
+    <div class="bg-orb orb-cyan"></div>
+
+    <div class="login-container">
+
+        <!-- Scanner Viewfinder Corners -->
+        <div class="corner top-left"></div>
+        <div class="corner top-right"></div>
+        <div class="corner bottom-left"></div>
+        <div class="corner bottom-right"></div>
+
+        <!-- Header with Logo on the Left and Title on the Right -->
+        <div class="header-row">
+            <div class="mini-logo">
+                <svg class="qr-logo" viewBox="0 0 100 100">
+                    <path class="qr-path qr-path-blue" d="M 10 10 H 35 V 35 H 10 Z" />
+                    <path class="qr-path qr-path-cyan" d="M 18 18 H 27 V 27 H 18 Z" />
+                    <path class="qr-path qr-path-blue" d="M 65 10 H 90 V 35 H 65 Z" />
+                    <path class="qr-path qr-path-cyan" d="M 73 18 H 82 V 27 H 73 Z" />
+                    <path class="qr-path qr-path-blue" d="M 10 65 H 35 V 90 H 10 Z" />
+                    <path class="qr-path qr-path-cyan" d="M 18 73 H 27 V 82 H 18 Z" />
+                    <path class="qr-path qr-path-cyan" d="M 40 40 H 60 V 60 H 40 Z" />
+                    <path class="qr-path qr-path-blue" d="M 45 45 H 55 V 55 H 45 Z" />
+                    <path class="qr-path qr-path-blue" d="M 90 55 V 90 H 55" />
+                    <path class="qr-path qr-path-cyan" d="M 65 90 V 75 H 80" />
+                </svg>
+            </div>
+            <div class="title-container">
+                <h1><span class="qr-text">QR</span><span class="nish-text">NISH</span></h1>
+            </div>
+        </div>
+        
+        <p class="subtitle">Sign in with your QRNISH account</p>
+
+        <!-- Email/Mobile Input -->
+        <div class="input-group">
+            <label for="identifier">Email or Mobile Number</label>
+            <input type="text" id="identifier" placeholder="Enter your email or mobile">
+        </div>
+
+        <!-- Password Input -->
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password">
+        </div>
+
+        <!-- Forgot Password Link -->
+        <div class="forgot-container">
+            <a href="forgot_pass.html" class="forgot-link">Forgot your password?</a>
+        </div>
+
+        <!-- Sign In Button -->
+        <button class="otp-btn" id="signInBtn">
+            Sign In
+        </button>
+
+        <!-- Prominent New User Sign Up Button Format -->
+        <div class="signup-box">
+            <p>New to QRNISH?</p>
+            <a href="6new_register.html">
+                <button class="signup-cta-btn">Create an Account (Sign Up)</button>
+            </a>
+        </div>
+
+        <div class="divider">
+            <span>OR</span>
+       
+        </div>
+           <div id="googleBtn"></div>  
+
+     
+
+    </div>
+<script src="https://accounts.google.com/gsi/client" async></script>
+<script src="google-login.js"></script>
+</body>
+
+</html>
