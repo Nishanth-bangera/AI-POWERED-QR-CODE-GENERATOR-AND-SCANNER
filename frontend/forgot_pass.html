@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Forgot Password | QRNISH</title>
 
 <link rel="stylesheet" href="forgot_pass.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&display=swap"
+    rel="stylesheet"
+>
 
 </head>
+
 
 <body>
 
@@ -24,122 +31,298 @@
 <div class="auth-card">
 
 
-<!-- Logo + Name -->
- <div class="header-row">
-                <div class="mini-logo">
-                    <!-- Your Custom QRNISH Logo -->
-                    <svg class="qr-logo" viewBox="0 0 100 100">
-                        <path class="qr-path qr-path-blue" d="M 10 10 H 35 V 35 H 10 Z" />
-                        <path class="qr-path qr-path-cyan" d="M 18 18 H 27 V 27 H 18 Z" />
-                        <path class="qr-path qr-path-blue" d="M 65 10 H 90 V 35 H 65 Z" />
-                        <path class="qr-path qr-path-cyan" d="M 73 18 H 82 V 27 H 73 Z" />
-                        <path class="qr-path qr-path-blue" d="M 10 65 H 35 V 90 H 10 Z" />
-                        <path class="qr-path qr-path-cyan" d="M 18 73 H 27 V 82 H 18 Z" />
-                        <path class="qr-path qr-path-cyan" d="M 40 40 H 60 V 60 H 40 Z" />
-                        <path class="qr-path qr-path-blue" d="M 45 45 H 55 V 55 H 45 Z" />
-                        <path class="qr-path qr-path-blue no-fill" d="M 90 55 V 90 H 55" />
-                        <path class="qr-path qr-path-cyan no-fill" d="M 65 90 V 75 H 80" />
-                    </svg>
-                </div>
-                <div class="title-container">
-                    <h1><span class="qr-text">QR</span><span class="nish-text">NISH</span></h1>
-                </div>
-            </div>
+<!-- ==================================
+     LOGO + NAME
+================================== -->
+
+<div class="header-row">
+
+    <div class="mini-logo">
+
+        <svg class="qr-logo" viewBox="0 0 100 100">
+
+            <path
+                class="qr-path qr-path-blue"
+                d="M 10 10 H 35 V 35 H 10 Z"
+            />
+
+            <path
+                class="qr-path qr-path-cyan"
+                d="M 18 18 H 27 V 27 H 18 Z"
+            />
+
+            <path
+                class="qr-path qr-path-blue"
+                d="M 65 10 H 90 V 35 H 65 Z"
+            />
+
+            <path
+                class="qr-path qr-path-cyan"
+                d="M 73 18 H 82 V 27 H 73 Z"
+            />
+
+            <path
+                class="qr-path qr-path-blue"
+                d="M 10 65 H 35 V 90 H 10 Z"
+            />
+
+            <path
+                class="qr-path qr-path-cyan"
+                d="M 18 73 H 27 V 82 H 18 Z"
+            />
+
+            <path
+                class="qr-path qr-path-cyan"
+                d="M 40 40 H 60 V 60 H 40 Z"
+            />
+
+            <path
+                class="qr-path qr-path-blue"
+                d="M 45 45 H 55 V 55 H 45 Z"
+            />
+
+            <path
+                class="qr-path qr-path-blue no-fill"
+                d="M 90 55 V 90 H 55"
+            />
+
+            <path
+                class="qr-path qr-path-cyan no-fill"
+                d="M 65 90 V 75 H 80"
+            />
+
+        </svg>
+
+    </div>
+
+
+    <div class="title-container">
+
+        <h1>
+            <span class="qr-text">QR</span>
+            <span class="nish-text">NISH</span>
+        </h1>
+
+    </div>
+
+</div>
+
+
 <p class="subtitle">
-Reset your password
+    Reset your password
 </p>
-<form id="forgotForm"></form>
-<!-- Email -->
+
+
+<!-- ==================================
+     FORM
+================================== -->
+
+<form id="forgotForm">
+
+
+<!-- ==================================
+     EMAIL
+================================== -->
+
 <div class="input-group">
-<label>Email Address</label>
-<input 
-type="email" 
-id="email"
-placeholder="you@example.com"
+
+    <label for="email">
+        Email Address
+    </label>
+
+    <input
+        type="email"
+        id="email"
+        placeholder="you@example.com"
+        autocomplete="email"
+    >
+
+</div>
+
+
+<!-- ==================================
+     SEND OTP
+================================== -->
+
+<div class="input-group">
+
+    <button
+        type="button"
+        class="btn-secondary"
+        id="send-otp-btn"
+    >
+        Send OTP
+    </button>
+
+</div>
+
+
+<!-- ==================================
+     OTP SECTION
+================================== -->
+
+<div
+    class="input-group"
+    id="otp-container"
+    style="display:none;"
 >
+
+    <label for="otp">
+        Enter OTP
+    </label>
+
+
+    <div class="otp-wrapper">
+
+        <input
+            type="text"
+            id="otp"
+            maxlength="6"
+            inputmode="numeric"
+            placeholder="Enter OTP"
+        >
+
+        <button
+            type="button"
+            class="btn-secondary"
+            id="verify-otp-btn"
+        >
+            Verify
+        </button>
+
+    </div>
+
+
+    <!-- RESEND OTP -->
+
+    <button
+        type="button"
+        id="resend-otp-btn"
+        class="btn-secondary"
+        style="display:none;margin-top:10px;"
+    >
+        Resend OTP
+    </button>
+
+
+    <!-- OTP STATUS -->
+
+    <p
+        id="otp-status"
+        style="margin-top:8px;"
+    ></p>
+
 </div>
-<!-- Send OTP -->
-<div class="input-group">
-<button 
-type="button"
-class="btn-secondary"
-id="send-otp-btn">
-Send OTP
-</button>
+
+
+<!-- ==================================
+     PASSWORD SECTION
+================================== -->
+
+<div
+    id="password-section"
+    style="display:none;"
+>
+
+
+    <!-- NEW PASSWORD -->
+
+    <div class="input-group">
+
+        <label for="password">
+            New Password
+        </label>
+
+        <div class="password-wrapper">
+
+            <input
+                type="password"
+                id="password"
+                placeholder="••••••••"
+                minlength="4"
+            >
+
+            <button
+                type="button"
+                class="toggle-password"
+                data-target="password"
+            >
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- CONFIRM PASSWORD -->
+
+    <div class="input-group">
+
+        <label for="confirm-password">
+            Confirm Password
+        </label>
+
+        <div class="password-wrapper">
+
+            <input
+                type="password"
+                id="confirm-password"
+                placeholder="••••••••"
+                minlength="4"
+            >
+
+            <button
+                type="button"
+                class="toggle-password"
+                data-target="confirm-password"
+            >
+            </button>
+
+        </div>
+
+    </div>
+
 </div>
-<!-- OTP Section -->
-<div 
-class="input-group"
-id="otp-container"
-style="display:none;">
-<label>Enter OTP</label>
-<div class="otp-wrapper">
-<input 
-type="text"
-id="otp"
-maxlength="6"
-placeholder="Enter OTP">
-<button 
-type="button"
-class="btn-secondary"
-id="verify-otp-btn">
-Verify
-</button>
-</div>
+
+
+<!-- ==================================
+     RESET PASSWORD
+================================== -->
+
 <button
-type="button"
-id="resend-otp-btn"
-class="btn-secondary"
-style="display:none;margin-top:10px;">
-Resend OTP
-</button>
-</div>
-<!-- Password Section -->
-<div id="password-section" style="display:none;">
-<div class="input-group">
-<label>New Password</label>
-<div class="password-wrapper">
-<input 
-type="password"
-id="password"
-placeholder="••••••••">
-<button 
-type="button"
-class="toggle-password"
-data-target="password">
-</button>
-</div>
-</div>
-<div class="input-group">
-<label>Confirm Password</label>
-<div class="password-wrapper">
-<input 
-type="password"
-id="confirm-password"
-placeholder="••••••••">
-<button 
-type="button"
-class="toggle-password"
-data-target="confirm-password"
+    type="submit"
+    class="btn-primary"
+    id="reset-password-btn"
 >
+    Reset Password
 </button>
-</div>
-</div>
-</div>
-<button 
-type="submit"
-class="btn-primary">
-Reset Password
-</button>
+
+
 </form>
+
+
+<!-- ==================================
+     LOGIN
+================================== -->
+
 <p class="auth-footer">
-Remember password?
-<a href="4login.html">
-Login
-</a>
+
+    Remember password?
+
+    <a href="4login.html">
+        Login
+    </a>
+
 </p>
+
+
 </div>
+
 </div>
+
+
 <script src="forgot_pass.js"></script>
+
 </body>
+
 </html>

@@ -20,66 +20,132 @@
         <div class="auth-card">
 
             <div class="header-row">
+
                 <div class="mini-logo">
                     <svg class="qr-logo" viewBox="0 0 100 100">
-                        <path class="qr-path qr-path-blue" d="M 10 10 H 35 V 35 H 10 Z" />
-                        <path class="qr-path qr-path-cyan" d="M 18 18 H 27 V 27 H 18 Z" />
-                        <path class="qr-path qr-path-blue" d="M 65 10 H 90 V 35 H 65 Z" />
-                        <path class="qr-path qr-path-cyan" d="M 73 18 H 82 V 27 H 73 Z" />
-                        <path class="qr-path qr-path-blue" d="M 10 65 H 35 V 90 H 10 Z" />
-                        <path class="qr-path qr-path-cyan" d="M 18 73 H 27 V 82 H 18 Z" />
-                        <path class="qr-path qr-path-cyan" d="M 40 40 H 60 V 60 H 40 Z" />
-                        <path class="qr-path qr-path-blue" d="M 45 45 H 55 V 55 H 45 Z" />
-                        <path class="qr-path qr-path-blue no-fill" d="M 90 55 V 90 H 55" />
-                        <path class="qr-path qr-path-cyan no-fill" d="M 65 90 V 75 H 80" />
+
+                        <path class="qr-path qr-path-blue"
+                              d="M 10 10 H 35 V 35 H 10 Z" />
+
+                        <path class="qr-path qr-path-cyan"
+                              d="M 18 18 H 27 V 27 H 18 Z" />
+
+                        <path class="qr-path qr-path-blue"
+                              d="M 65 10 H 90 V 35 H 65 Z" />
+
+                        <path class="qr-path qr-path-cyan"
+                              d="M 73 18 H 82 V 27 H 73 Z" />
+
+                        <path class="qr-path qr-path-blue"
+                              d="M 10 65 H 35 V 90 H 10 Z" />
+
+                        <path class="qr-path qr-path-cyan"
+                              d="M 18 73 H 27 V 82 H 18 Z" />
+
+                        <path class="qr-path qr-path-cyan"
+                              d="M 40 40 H 60 V 60 H 40 Z" />
+
+                        <path class="qr-path qr-path-blue"
+                              d="M 45 45 H 55 V 55 H 45 Z" />
+
+                        <path class="qr-path qr-path-blue no-fill"
+                              d="M 90 55 V 90 H 55" />
+
+                        <path class="qr-path qr-path-cyan no-fill"
+                              d="M 65 90 V 75 H 80" />
+
                     </svg>
                 </div>
 
                 <div class="title-container">
+
                     <h1>
                         <span class="qr-text">QR</span><span class="nish-text">NISH</span>
                     </h1>
+
                 </div>
+
             </div>
 
             <p class="subtitle">Create your account</p>
 
+
             <form id="registerForm" onsubmit="event.preventDefault();">
 
+
+                <!-- FULL NAME -->
+
                 <div class="input-group">
+
                     <label for="fullname">Full Name</label>
-                    <input type="text" id="fullname" placeholder="John Doe" required>
+
+                    <input
+                        type="text"
+                        id="fullname"
+                        placeholder="John Doe"
+                        required>
+
                 </div>
 
+
+                <!-- MOBILE NUMBER -->
+
                 <div class="input-group">
+
                     <label for="mobile">Mobile Number</label>
 
+                    <input
+                        type="tel"
+                        id="mobile"
+                        placeholder="+91 9876543210"
+                        required>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="input-group">
+
+                    <label for="email">Email Address</label>
+
                     <div class="mobile-input-wrapper">
+
                         <input
-                            type="tel"
-                            id="mobile"
-                            placeholder="+91 9876543210"
-                            required
-                        >
+                            type="email"
+                            id="email"
+                            placeholder="you@example.com"
+                            required>
 
                         <button
                             type="button"
                             class="btn-secondary"
                             id="send-otp-btn">
+
                             Send OTP
+
                         </button>
+
                     </div>
+
                 </div>
 
-                <!-- OTP section -->
-                <div class="input-group" id="otp-section" style="display:none;">
-                    <label for="otp">Enter OTP</label>
+
+                <!-- EMAIL OTP -->
+
+                <div
+                    class="input-group"
+                    id="otp-section"
+                    style="display:none;">
+
+                    <label for="otp">Enter Email OTP</label>
 
                     <div class="mobile-input-wrapper">
+
                         <input
                             type="text"
                             id="otp"
-                            placeholder="Enter OTP"
+                            placeholder="Enter 6-digit OTP"
                             maxlength="6"
                             inputmode="numeric">
 
@@ -87,26 +153,26 @@
                             type="button"
                             class="btn-secondary"
                             id="verify-otp-btn">
+
                             Verify OTP
+
                         </button>
+
                     </div>
 
                     <small id="otp-status"></small>
+
                 </div>
 
-                <div class="input-group">
-                    <label for="email">Email Address</label>
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="you@example.com"
-                        required>
-                </div>
+
+                <!-- PASSWORD -->
 
                 <div class="input-group">
+
                     <label for="password">Password</label>
 
                     <div class="password-wrapper">
+
                         <input
                             type="password"
                             id="password"
@@ -118,23 +184,43 @@
                             class="toggle-password"
                             data-target="password">
 
-                            <svg width="20" height="20"
-                                 viewBox="0 0 24 24"
-                                 fill="none"
-                                 stroke="currentColor"
-                                 stroke-width="2">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
+                            <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2">
+
+                                <path
+                                    d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
+                                </path>
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="3">
+                                </circle>
+
                             </svg>
 
                         </button>
+
                     </div>
+
                 </div>
 
+
+                <!-- CONFIRM PASSWORD -->
+
                 <div class="input-group">
-                    <label for="confirm-password">Confirm Password</label>
+
+                    <label for="confirm-password">
+                        Confirm Password
+                    </label>
 
                     <div class="password-wrapper">
+
                         <input
                             type="password"
                             id="confirm-password"
@@ -146,84 +232,88 @@
                             class="toggle-password"
                             data-target="confirm-password">
 
-                            <svg width="20" height="20"
-                                 viewBox="0 0 24 24"
-                                 fill="none"
-                                 stroke="currentColor"
-                                 stroke-width="2">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
+                            <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2">
+
+                                <path
+                                    d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
+                                </path>
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="3">
+                                </circle>
+
                             </svg>
 
                         </button>
+
                     </div>
+
                 </div>
 
+
+                <!-- ERROR / STATUS -->
+
                 <div id="error"></div>
+
+
+                <!-- CREATE ACCOUNT -->
 
                 <button
                     type="submit"
                     class="btn-primary"
                     id="create-account-btn">
+
                     Create Account
+
                 </button>
 
             </form>
 
+
             <div class="divider">
+
                 <span>OR</span>
+
             </div>
+
 
             <div id="googleBtn"></div>
 
+
             <p class="auth-footer">
+
                 Already have an account?
-                <a href="4login.html">Login</a>
+
+                <a href="4login.html">
+                    Login
+                </a>
+
             </p>
 
         </div>
     </div>
 
-    <script src="https://accounts.google.com/gsi/client" async></script>
+
+    <!-- GOOGLE LOGIN -->
+
+    <script
+        src="https://accounts.google.com/gsi/client"
+        async>
+    </script>
+
     <script src="google-login.js"></script>
 
-    <!-- MSG91 CONFIGURATION -->
-    <script>
-        var configuration = {
-            widgetId: "366a636d7a54383730353937",
 
-            /*
-             * IMPORTANT:
-             * Put the VALUE of your NEW
-             * QRNISHwebotp Website Token here.
-             *
-             * DO NOT use the old token.
-             */
-            tokenAuth: "577332TktpeCvHoD6ac12278P1",
+    <!-- QRNISH REGISTRATION JAVASCRIPT -->
 
-            exposeMethods: true,
-
-            success: function(data) {
-                console.log("MSG91 success:", data);
-            },
-
-            failure: function(error) {
-                console.error("MSG91 failure FULL:", JSON.stringify(error, null, 2));
-                console.error("MSG91 failure RAW:", error);
-                document.getElementById("error").innerText =
-                    "MSG91 Error: " + JSON.stringify(error);
-            }
-        };
-    </script>
-
-    <!-- Current MSG91 Web SDK -->
-    <script
-        type="text/javascript"
-        src="https://verify.msg91.com/otp-provider.js"
-        onload="initSendOTP(configuration)">
-    </script>
-
-    <!-- Your registration JavaScript -->
     <script src="8register.js"></script>
 
 </body>

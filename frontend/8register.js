@@ -1,4 +1,8 @@
+// ------------------------------------
+// EMAIL VERIFIED STATUS
+// ------------------------------------
 
+let emailVerified = false;
 
 
 // ------------------------------------
@@ -15,111 +19,128 @@ function showMessage(message, color = "red") {
 
 
 // ------------------------------------
-// CONVERT MOBILE NUMBER
+// SEND EMAIL OTP
 // ------------------------------------
 
-function getMobileNumber() {
+document.getElementById("send-otp-btn").addEventListener("click", async function () {
 
-    let mobile = document.getElementById("mobile").value.trim();
+    const email =
+        document.getElementById("email").value.trim();
 
-    // Remove spaces, +, -, brackets, etc.
-    mobile = mobile.replace(/\D/g, "");
+    // Check email
+    if (!email) {
 
-    // If user entered 9876543210
-    if (mobile.length === 10) {
-        return mobile;
-    }
-
-    // If user entered 919876543210
-    if (mobile.length === 12 && mobile.startsWith("91")) {
-        return mobile.slice(2);
-    }
-
-    return null;
-}
-
-
-// ------------------------------------
-// SEND OTP
-// ------------------------------------
-
-document.getElementById("send-otp-btn").addEventListener("click", function () {
-
-    const mobile = getMobileNumber();
-
-    if (!mobile) {
-
-        showMessage(
-            "Please enter a valid 10-digit Indian mobile number."
-        );
+        showMessage("Please enter your email address.");
 
         return;
     }
 
 
-    if (typeof window.sendOtp !== "function") {
+    // Basic email validation
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
 
-        console.error("MSG91 sendOtp() is not available.");
-
-        showMessage(
-            "MSG91 OTP service is not loaded. Please refresh the page."
-        );
+        showMessage("Please enter a valid email address.");
 
         return;
     }
 
 
-    const sendButton = document.getElementById("send-otp-btn");
+    const sendButton =
+        document.getElementById("send-otp-btn");
 
+
+    // Prevent multiple clicks
     sendButton.disabled = true;
     sendButton.innerText = "Sending...";
 
 
-    console.log("Sending OTP to:", mobile);
+    console.log("Sending email OTP to:", email);
 
 
-    window.sendOtp(
+    try {
 
-        mobile,
+        const response = await fetch(
+            "http://127.0.0.1:8000/send-email-otp",
+            {
 
-        function (data) {
+                method: "POST",
 
-            console.log("OTP sent successfully:", data);
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-            document.getElementById("otp-section").style.display = "block";
+                body: JSON.stringify({
+                    email: email
+                })
+            }
+        );
 
-            document.getElementById("otp-status").innerText =
-                "OTP sent to your mobile number.";
 
-            document.getElementById("otp-status").style.color = "green";
+        const data = await response.json();
 
-            sendButton.disabled = false;
-            sendButton.innerText = "Resend OTP";
-        },
 
-        function (error) {
+        if (!response.ok || !data.success) {
 
-            console.error("OTP send failed:", error);
+            console.error("Email OTP failed:", data);
 
             showMessage(
-                "Unable to send OTP. Please check your mobile number."
+                data.message || "Unable to send OTP."
             );
 
             sendButton.disabled = false;
             sendButton.innerText = "Send OTP";
+
+            return;
         }
-    );
+
+
+        console.log("Email OTP sent successfully:", data);
+
+
+        // Show OTP section
+        document.getElementById("otp-section").style.display = "block";
+
+
+        document.getElementById("otp-status").innerText =
+            "OTP sent to your email.";
+
+        document.getElementById("otp-status").style.color =
+            "green";
+
+
+        sendButton.disabled = false;
+        sendButton.innerText = "Resend OTP";
+
+
+    } catch (error) {
+
+        console.error("Email OTP connection error:", error);
+
+        showMessage(
+            "Unable to connect to the server."
+        );
+
+        sendButton.disabled = false;
+        sendButton.innerText = "Send OTP";
+    }
+
 });
 
 
 // ------------------------------------
-// VERIFY OTP
+// VERIFY EMAIL OTP
 // ------------------------------------
 
-document.getElementById("verify-otp-btn").addEventListener("click", function () {
+document.getElementById("verify-otp-btn").addEventListener("click", async function () {
 
-    const otp = document.getElementById("otp").value.trim();
+    const email =
+        document.getElementById("email").value.trim();
 
+    const otp =
+        document.getElementById("otp").value.trim();
+
+
+    // Check OTP
     if (!otp) {
 
         showMessage("Please enter the OTP.");
@@ -128,73 +149,110 @@ document.getElementById("verify-otp-btn").addEventListener("click", function () 
     }
 
 
-    if (!/^\d{4,6}$/.test(otp)) {
+    // OTP must be 6 digits
+    if (!/^\d{6}$/.test(otp)) {
 
-        showMessage("Please enter a valid OTP.");
-
-        return;
-    }
-
-
-    if (typeof window.verifyOtp !== "function") {
-
-        console.error("MSG91 verifyOtp() is not available.");
-
-        showMessage(
-            "MSG91 verification service is not loaded."
-        );
+        showMessage("Please enter the 6-digit OTP.");
 
         return;
     }
 
 
-    const verifyButton = document.getElementById("verify-otp-btn");
+    const verifyButton =
+        document.getElementById("verify-otp-btn");
+
 
     verifyButton.disabled = true;
     verifyButton.innerText = "Verifying...";
 
 
-    window.verifyOtp(
+    console.log("Verifying email OTP for:", email);
 
-        otp,
 
-        function (data) {
+    try {
 
-            console.log("OTP verified successfully:", data);
+        const response = await fetch(
+            "http://127.0.0.1:8000/verify-email-otp",
+            {
 
-            mobileVerified = true;
+                method: "POST",
 
-            document.getElementById("otp-status").innerText =
-                "Mobile number verified ✓";
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-            document.getElementById("otp-status").style.color = "green";
+                body: JSON.stringify({
+                    email: email,
+                    otp: otp
+                })
+            }
+        );
 
-            verifyButton.innerText = "Verified ✓";
 
-            verifyButton.disabled = true;
+        const data = await response.json();
 
-            document.getElementById("send-otp-btn").disabled = true;
+
+        if (!response.ok || !data.success) {
+
+            console.error("OTP verification failed:", data);
+
+            emailVerified = false;
 
             showMessage(
-                "Mobile number verified successfully.",
-                "green"
-            );
-        },
-
-        function (error) {
-
-            console.error("OTP verification failed:", error);
-
-            mobileVerified = false;
-
-            showMessage(
-                "Incorrect OTP. Please try again."
+                data.message || "Incorrect OTP."
             );
 
             verifyButton.disabled = false;
             verifyButton.innerText = "Verify OTP";
+
+            return;
         }
-    );
+
+
+        // Email verified
+        emailVerified = true;
+
+
+        console.log("Email OTP verified successfully.");
+
+
+        document.getElementById("otp-status").innerText =
+            "Email verified ✓";
+
+        document.getElementById("otp-status").style.color =
+            "green";
+
+
+        verifyButton.innerText =
+            "Verified ✓";
+
+        verifyButton.disabled = true;
+
+
+        document.getElementById("send-otp-btn").disabled =
+            true;
+
+
+        showMessage(
+            "Email verified successfully.",
+            "green"
+        );
+
+
+    } catch (error) {
+
+        console.error("OTP verification connection error:", error);
+
+        emailVerified = false;
+
+        showMessage(
+            "Unable to connect to the server."
+        );
+
+        verifyButton.disabled = false;
+        verifyButton.innerText = "Verify OTP";
+    }
+
 });
 
 
@@ -225,7 +283,9 @@ document.getElementById("registerForm").addEventListener(
             document.getElementById("confirm-password").value;
 
 
-        // Check fields
+        // ------------------------------------
+        // CHECK FIELDS
+        // ------------------------------------
 
         if (
             name === "" ||
@@ -241,7 +301,13 @@ document.getElementById("registerForm").addEventListener(
         }
 
 
-        // Check password
+        // ------------------------------------
+        // CHECK PASSWORD
+        // ------------------------------------
+        if (password.length < 4) {
+    showMessage("Password must be at least 4 characters");
+    return;
+}
 
         if (password !== confirmPassword) {
 
@@ -251,18 +317,23 @@ document.getElementById("registerForm").addEventListener(
         }
 
 
-        // IMPORTANT:
-        // Mobile must be verified before registration
+        // ------------------------------------
+        // EMAIL MUST BE VERIFIED
+        // ------------------------------------
 
-        if (!mobileVerified) {
+        if (!emailVerified) {
 
             showMessage(
-                "Please verify your mobile number with OTP first."
+                "Please verify your email with OTP first."
             );
 
             return;
         }
 
+
+        // ------------------------------------
+        // REGISTER
+        // ------------------------------------
 
         try {
 

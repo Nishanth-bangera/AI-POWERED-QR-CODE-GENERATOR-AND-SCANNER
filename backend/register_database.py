@@ -1,35 +1,43 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
-
-DATABASE_URL = "sqlite:///./qrnish.db"
-
-engine = create_engine(
-    DATABASE_URL,
-    connect_args={"check_same_thread": False}
-)
-
-SessionLocal = sessionmaker(
-    autocommit=False,
-    autoflush=False,
-    bind=engine
-)
-
-Base = declarative_base()
 import sqlite3
 
-conn = sqlite3.connect("user.db")
+# ------------------------------------
+# DATABASE FILE
+# ------------------------------------
+DATABASE = "user.db"
 
-cursor = conn.cursor()
 
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS users(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    mobile TEXT,
-    email TEXT UNIQUE,
-    password TEXT
-)
-""")
+# ------------------------------------
+# CREATE DATABASE AND USERS TABLE
+# ------------------------------------
+def create_database():
 
-conn.commit()
-conn.close()
+    conn = sqlite3.connect(DATABASE)
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS users(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        mobile TEXT NOT NULL,
+        email TEXT UNIQUE NOT NULL,
+        password TEXT NOT NULL
+    )
+    """)
+
+    conn.commit()
+    conn.close()
+
+
+# ------------------------------------
+# GET DATABASE CONNECTION
+# ------------------------------------
+def get_connection():
+
+    return sqlite3.connect(DATABASE)
+
+
+# ------------------------------------
+# CREATE DATABASE WHEN FILE RUNS
+# ------------------------------------
+create_database()
